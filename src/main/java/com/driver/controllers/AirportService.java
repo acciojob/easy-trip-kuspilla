@@ -65,6 +65,11 @@ public class AirportService {
     }
     //================================================================//
 
+     public int countOfBookingsDoneByPassengerAllCombined(Integer passengerId){
+        int ans = repository_ob.countOfBookingsDoneByPassengerAllCombined(passengerId);
+        return ans;
+     }
+
     public String add_airport(Airport airport) {
 
 
@@ -75,6 +80,18 @@ public class AirportService {
     }
     //=================================//
 
+     public String getAirportNameFromFlightId(Integer flightId){
+        String ans = repository_ob.getAirportNameFromFlightId(flightId);
+        return ans;
+     }
+
+     //========================================================//
+
+    public int calculateRevenueOfAFlight(Integer flightId){
+        int ans = repository_ob.calculateRevenueOfAFlight(flightId);
+        return ans;
+    }
+    //===========================================================//
     public String add_passenger(Passenger passenger) {
 
         String ans = repository_ob.add_passenger(passenger);

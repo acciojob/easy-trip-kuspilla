@@ -73,8 +73,8 @@ public class AirportController {
         //return a String "FAILURE"
         //Also if the passenger has already booked a flight then also return "FAILURE".
         //else if you are able to book a ticket then return "SUCCESS"
-
-        return null;
+        String ans = service_ob.bookATicket(flightId, passengerId);
+        return ans;
     }
 
     @PutMapping("/cancel-a-ticket")
@@ -84,8 +84,8 @@ public class AirportController {
         // then return a "FAILURE" message
         // Otherwise return a "SUCCESS" message
         // and also cancel the ticket that passenger had booked earlier on the given flightId
-
-       return null;
+        String ans = service_ob.cancelATicket(flightId, passengerId);
+       return ans;
     }
 
 
@@ -93,7 +93,9 @@ public class AirportController {
     public int countOfBookingsDoneByPassengerAllCombined(@PathVariable("passengerId")Integer passengerId){
 
         //Tell the count of flight bookings done by a passenger: This will tell the total count of flight bookings done by a passenger :
-       return 0;
+       int ans = service_ob.countOfBookingsDoneByPassengerAllCombined(passengerId);
+
+       return ans;
     }
 
     @PostMapping("/add-flight")
@@ -111,8 +113,8 @@ public class AirportController {
 
         //We need to get the starting airportName from where the flight will be taking off (Hint think of City variable if that can be of some use)
         //return null incase the flightId is invalid or you are not able to find the airportName
-
-        return null;
+        String ans = service_ob.getAirportNameFromFlightId(flightId);
+        return ans;
     }
 
 
@@ -122,9 +124,9 @@ public class AirportController {
         //Calculate the total revenue that a flight could have
         //That is of all the passengers that have booked a flight till now and then calculate the revenue
         //Revenue will also decrease if some passenger cancels the flight
+             int ans = service_ob.calculateRevenueOfAFlight(flightId);
 
-
-        return 0;
+        return ans;
     }
 
 

@@ -13,6 +13,7 @@ import java.util.*;
 @Repository
 public class AirportRepository {
     HashMap<Integer, Passenger> passengerDB = new HashMap<>();
+    HashMap<Integer,Integer> cancelTicketDB = new HashMap<>();
     HashMap<String, Airport> airportDB = new HashMap<>();
     HashMap<Integer, Flight> flightDB = new HashMap<>();
     HashMap<Integer, List<Integer>> flightId_vs_passengerId_DB = new HashMap<>();
@@ -125,6 +126,7 @@ public class AirportRepository {
         }
 
         if( foundleft){
+            cancelTicketDB.put(flightId, passengerId);
             passengerId_vs_flightId_DB.get(passengerId).remove(flightId);
             flightId_vs_passengerId_DB.get(flightId).remove(passengerId);
             return "SUCCESS";
@@ -135,6 +137,18 @@ public class AirportRepository {
 
     //=============================================================//
 
+    public int countOfBookingsDoneByPassengerAllCombined(Integer passengerId){
+        int count =0;
+        for( List<Integer> passnger : flightId_vs_passengerId_DB.values()){
+            if( passnger.contains(passengerId)){
+                count++;
+            }
+        }
+        return count;
+
+    }
+     //==============================================================//
+
 
     public String add_flight(Flight flight){
 
@@ -144,6 +158,7 @@ public class AirportRepository {
                 return "FAILURE";
             }
             else{
+
                 flightDB.put(flightId, flight);
                 return "SUCCESS";
             }
@@ -154,6 +169,27 @@ public class AirportRepository {
     }
 
  //============================================================================//
+
+    public String getAirportNameFromFlightId(Integer flightId){
+           if( flightDB.containsKey(flightId)){
+               City city = flightDB.get(flightId).getFromCity();
+            for( Airport airport : airportDB.values()){
+                if( airport.getCity().equals(city)){
+                    return airport.getAirportName();
+                }
+            }
+            return null;
+           }else{
+               return null;
+           }
+    }
+
+    //=======================================================================//
+
+    public int calculateRevenueOfAFlight(Integer flightId){
+        int caluclateFair = cancelTicketDB.getOrDefault(flightId, 1)*50;
+        return calculaateFlightFare(flightId) -caluclateFair;
+    }
 
     public String add_passenger(Passenger passenger){
 
@@ -184,7 +220,7 @@ public class AirportRepository {
                 Airport_name = airport.getAirportName();
             }
             else if( terninal == airport.getNoOfTerminals()){
-                if( Airport_name.compareTo( airport.getAirportName()) < 3){
+                if( Airport_name.compareTo( airport.getAirportName()) > 0){
                     Airport_name = airport.getAirportName();
                 }
             }
