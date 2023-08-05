@@ -7,22 +7,21 @@ import com.driver.model.Flight;
 import com.driver.model.Passenger;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 @RestController
 public class AirportController {
+
+    AirportService service_ob = new AirportService();
     @PostMapping("/add_airport")
     public String addAirport(@RequestBody Airport airport){
 
         //Simply add airport details to your database
         //Return a String message "SUCCESS"
 
-        return "SUCCESS";
+        String temp = service_ob.add_airport(airport);
+
+        return temp;
     }
 
     @GetMapping("/get-largest-aiport")
@@ -30,8 +29,9 @@ public class AirportController {
 
         //Largest airport is in terms of terminals. 3 terminal airport is larger than 2 terminal airport
         //Incase of a tie return the Lexicographically smallest airportName
+         String ans = service_ob.getLargestAirportName();
+         return ans;
 
-       return null;
     }
 
     @GetMapping("/get-shortest-time-travel-between-cities")
@@ -39,8 +39,9 @@ public class AirportController {
 
         //Find the duration by finding the shortest flight that connects these 2 cities directly
         //If there is no direct flight between 2 cities return -1.
+              double ans = service_ob.getShortestDurationOfPossibleBetweenTwoCities(fromCity, toCity);
 
-       return 0;
+       return ans;
     }
 
     @GetMapping("/get-number-of-people-on-airport-on/{date}")
@@ -48,8 +49,8 @@ public class AirportController {
 
         //Calculate the total number of people who have flights on that day on a particular airport
         //This includes both the people who have come for a flight and who have landed on an airport after their flight
-
-        return 0;
+        int ans = service_ob.getNumberOfPeopleOn(date, airportName);
+        return ans;
     }
 
     @GetMapping("/calculate-fare")
@@ -59,8 +60,8 @@ public class AirportController {
         //Price for any flight will be : 3000 + noOfPeopleWhoHaveAlreadyBooked*50
         //Suppose if 2 people have booked the flight already : the price of flight for the third person will be 3000 + 2*50 = 3100
         //This will not include the current person who is trying to book, he might also be just checking price
-
-       return 0;
+          int ans = service_ob.calculateFlightFare(flightId);
+       return ans;
 
     }
 
@@ -99,7 +100,9 @@ public class AirportController {
     public String addFlight(@RequestBody Flight flight){
 
         //Return a "SUCCESS" message string after adding a flight.
-       return null;
+        String ans = service_ob.add_flight(flight);
+
+       return ans;
     }
 
 
@@ -131,7 +134,8 @@ public class AirportController {
         //Add a passenger to the database
         //And return a "SUCCESS" message if the passenger has been added successfully.
 
-       return null;
+        String ans = service_ob.add_passenger(passenger);
+       return ans;
     }
 
 
