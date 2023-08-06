@@ -16,22 +16,22 @@ public class AirportService {
 
     AirportRepository repository_ob = new AirportRepository();
 
-    public String add_flight(Flight flight) {
+    public String addFlight(Flight flight) {
 
-        String ans = repository_ob.add_flight(flight);
+        String ans = repository_ob.addFlight(flight);
         return ans;
 
     }
 
     //================================================//
     public String getLargestAirportName() {
-        String ans = repository_ob.getLargestAirportName_helper();
+        String ans = repository_ob.getLargestAirport();
         return ans;
     }
 
     //==================================================//
     public double getShortestDurationOfPossibleBetweenTwoCities(City fromcity, City tocity) {
-        double ans = repository_ob.getShortestDurationOfPossibleBetweenTwoCities(fromcity, tocity);
+        double ans = repository_ob.getShortestDurationPossibleBetweenTwoCities(fromcity, tocity);
         return ans;
 
     }
@@ -46,35 +46,35 @@ public class AirportService {
 
     public int calculateFlightFare(Integer flightId) {
 
-        int ans = repository_ob.calculaateFlightFare(flightId);
+        int ans = repository_ob.calcluateFlightFare(flightId);
         return ans;
     }
 
     //========================================================//
     public String bookATicket(Integer flightId, Integer passengerId) {
 
-        String ans = repository_ob.bookingTicket(flightId, passengerId);
+        String ans = repository_ob.bookTicket(flightId, passengerId);
         return ans;
     }
     //=============================================================//
 
     public String cancelATicket(Integer flightId, Integer passengerId) {
 
-        String ans = repository_ob.cancelATicket(flightId, passengerId);
+        String ans = repository_ob.cancelTicket(flightId, passengerId);
         return ans;
     }
     //================================================================//
 
      public int countOfBookingsDoneByPassengerAllCombined(Integer passengerId){
-        int ans = repository_ob.countOfBookingsDoneByPassengerAllCombined(passengerId);
+        int ans = repository_ob.countBookingsofPassenger(passengerId);
         return ans;
      }
 
     public String add_airport(Airport airport) {
 
 
-        String ans = repository_ob.add_airport(airport);
-        return ans;
+        repository_ob.addAirport(airport);
+        return "SUCCESS";
 
 
     }
@@ -88,13 +88,13 @@ public class AirportService {
      //========================================================//
 
     public int calculateRevenueOfAFlight(Integer flightId){
-        int ans = repository_ob.calculateRevenueOfAFlight(flightId);
+        int ans = repository_ob.calculateRevenueofaFlight(flightId);
         return ans;
     }
     //===========================================================//
     public String add_passenger(Passenger passenger) {
 
-        String ans = repository_ob.add_passenger(passenger);
+        String ans = repository_ob.addPassenger(passenger);
         return ans;
     }
 

@@ -21,7 +21,7 @@ public class AirportController {
 
         String temp = service_ob.add_airport(airport);
 
-        return temp;
+        return "SUCCESS";
     }
 
     @GetMapping("/get-largest-aiport")
@@ -102,9 +102,9 @@ public class AirportController {
     public String addFlight(@RequestBody Flight flight){
 
         //Return a "SUCCESS" message string after adding a flight.
-        String ans = service_ob.add_flight(flight);
+        String ans = service_ob.addFlight(flight);
 
-       return ans;
+        return "SUCCESS";
     }
 
 
@@ -137,7 +137,7 @@ public class AirportController {
         //And return a "SUCCESS" message if the passenger has been added successfully.
 
         String ans = service_ob.add_passenger(passenger);
-       return ans;
+        return "SUCCESS";
     }
 
 
